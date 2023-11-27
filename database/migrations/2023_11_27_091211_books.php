@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('title');
             $table->string('author');
-            $table->date('year');
+            $table->integer('year');
             $table->string('genre');
             $table->integer('note');
             $table->timestamps();
