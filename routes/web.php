@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('book.index'));
+    return view('welcome');
 });
 
 Route::resource('book', BookController::class);

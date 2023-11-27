@@ -29,7 +29,24 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'year' => 'required|numeric|integer',
+            'genre' => 'required',
+            'note' => 'required|numeric|integer'
+        ]);
+
+        Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'year' => $request->year,
+            'genre' => $request->genre,
+            'note' => $request->note,
+        ]);
+
+        return redirect(route('book.index'))
+            ->with('success', "Le book a été créé");
     }
 
     /**
