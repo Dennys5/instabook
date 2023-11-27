@@ -3,8 +3,8 @@
 <head>
     <title>@yield('title')</title>
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> --}}
-    <script src="https://kit.fontawesome.com/f9d009cb2a.js" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{--     <script src="https://kit.fontawesome.com/f9d009cb2a.js" crossorigin="anonymous"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <link rel="stylesheet" href="resources\css\app.css">
 </head>
 <body>
