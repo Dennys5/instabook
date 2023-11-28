@@ -12,8 +12,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        // $book = Book::all()->sortBy('name');
-        return view('book.index');
+        $book = Book::all()->sortBy('name');
+        return view('book.index', compact('book'));
     }
 
     /**
@@ -54,7 +54,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+
+        return view('book.show', compact('book'));
     }
 
     /**
@@ -62,7 +63,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('book.edit', compact('book'));
     }
 
     /**
@@ -70,7 +71,23 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        // $request->validate([
+        //     'title' => 'required',
+        //     'author' => 'required',
+        //     'year' => 'required',
+        //     'genre' => 'required',
+        //     'note' => 'required',
+        // ]);
+
+        $book->title = ucwords(strtolower($request->title));
+        $book->author = $request->author;
+        $book->year = $request->year;
+        $book->genre = $request->genre;
+        $book->note = $request->note;
+
+        $book->save();
+
+        return redirect(route('book.show', compact('book')));
     }
 
     /**
@@ -78,6 +95,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect(route('book.index'))
+            ->with(['success', 'Livre supprimé avec succès']);
     }
 }
