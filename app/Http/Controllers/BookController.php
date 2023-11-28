@@ -34,8 +34,13 @@ class BookController extends Controller
             'author' => 'required',
             'year' => 'required|numeric|integer',
             'genre' => 'required',
-            'note' => 'required|numeric|integer'
+            'note' => 'required|numeric|integer',
+            'tag' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
         ]);
+
+        $fileName = time() . '.' . $request->image->extension();
+        $path = $request->image->storeAs('public/images', $fileName);
 
         Book::create([
             'title' => $request->title,
@@ -43,9 +48,11 @@ class BookController extends Controller
             'year' => $request->year,
             'genre' => $request->genre,
             'note' => $request->note,
+            'tag' => $request->tag,
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        return redirect(route('book.index'))
+        return redirect(route('book.show'))
             ->with('success', "Le book a été créé");
     }
 
@@ -71,19 +78,26 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        //     'author' => 'required',
-        //     'year' => 'required',
-        //     'genre' => 'required',
-        //     'note' => 'required',
-        // ]);
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'year' => 'required',
+            'genre' => 'required',
+            'note' => 'required',
+            'tag' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
 
         $book->title = ucwords(strtolower($request->title));
         $book->author = $request->author;
         $book->year = $request->year;
         $book->genre = $request->genre;
         $book->note = $request->note;
+        $book->tag = $request->tag;
+        $book->image = $request->image;
+
+        $path = $request->image->store('images');
+        $book->image = $path;
 
         $book->save();
 

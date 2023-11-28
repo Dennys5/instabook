@@ -43,6 +43,10 @@ Note :
 @if($errors->has('note'))
 <p>{{$errors->first('note')}}</p>
 @endif
+<input type="file" name="image" accept="image/png, image/jpeg">
+@if($errors->has('image'))
+    <p>{{$errors->first('image')}}</p>
+@endif
     <input type='submit' value='Modifier the motherfucker'>
     </form>
     @endsection
