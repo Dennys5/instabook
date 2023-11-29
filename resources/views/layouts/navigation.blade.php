@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <img class="logo1" src="https://cdn.discordapp.com/attachments/1154418633741709372/1179051219612872724/instabook.png?ex=65786004&is=6565eb04&hm=2dd9d2a04dcf1ea0c2470b2c8650c09ff8e893cb33213f8205719f48f0cff816&" alt="Logo">
                     </a>
                 </div>
 
@@ -15,14 +15,11 @@
                     <x-nav-link href="{{route('book.index')}}">
                         {{__('Home')}}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link> --}}
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="('dashboard')" :active="request()->routeIs('book.show')">
-                        {{ __('Liste') }}
+                    <x-nav-link href="{{route('book.create')}}">
+                        {{ __('Ajouter un livre')}}
                     </x-nav-link>
                 </div>
             </div>
