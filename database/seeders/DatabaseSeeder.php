@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         Book::factory(20)->create();
 
         $this->call([
-            BookSeeder::class
+            BookSeeder::class,
+            GenreSeeder::class
         ]);
     }
 }
