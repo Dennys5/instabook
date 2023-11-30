@@ -40,19 +40,20 @@ class BookController extends Controller
         ]);
 
         $fileName = time() . '.' . $request->image->extension();
-        $path = $request->image->storeAs('public/images', $fileName);
+        $request->image->storeAs('public/images', $fileName);
 
-        Book::create([
+
+        $book =  Book::create([
             'title' => $request->title,
             'author' => $request->author,
             'year' => $request->year,
             'genre' => $request->genre,
             'note' => $request->note,
             'tag' => $request->tag,
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => $fileName
         ]);
 
-        return redirect(route('book.show'))
+        return redirect(route('book.show', $book->id))
             ->with('success', "Le book a été créé");
     }
 
@@ -96,8 +97,6 @@ class BookController extends Controller
         $book->tag = $request->tag;
         $book->image = $request->image;
 
-        $path = $request->image->store('images');
-        $book->image = $path;
 
         $book->save();
 
@@ -112,5 +111,10 @@ class BookController extends Controller
         $book->delete();
         return redirect(route('book.index'))
             ->with(['success', 'Livre supprimé avec succès']);
+    }
+
+    public function rate(Book $book)
+    {
+        return redirect(route('book.show', compact('book')));
     }
 }
