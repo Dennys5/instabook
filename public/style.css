@@ -22,12 +22,19 @@ h1{
 body {
   background: #272727;
   font-family: "Montserrat", sans-serif;
-  color: #f6f4e6 !important;
 }
 
 .create-box{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+.label{
+  color: #f6f4e6;
 }
 
 /* css footer */
@@ -38,12 +45,13 @@ body {
 .bigCont{
   margin-top: 23px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100vw;
 }
 
 .footer-dark{
   margin-top: 3%;
+  color: #f6f4e6 ;
 }
 
 .footer-dark h3 {
@@ -362,17 +370,6 @@ css index */
   -webkit-transition: all .5s ease-in-out;
 }
 
-.cover1 {
-  background: url('http://fuel-design.com/media/uploads/publications/Soviet_Space_Dogs_cover.jpg');
-}
-
-.cover2 {
-  background: url('http://fuel-design.com/media/uploads/publications/Tattoo_Vol_I_cover.jpg');
-}
-
-.cover3 {
-  background: url('http://fuel-design.com/media/uploads/publications/CRIME_cover.jpg');
-}
 
 .book-index .book-cover {
   background-size: 100% 100%;
