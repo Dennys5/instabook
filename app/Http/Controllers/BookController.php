@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $genres = Genre::all()->sortBy('name');
+        return view('book.create', compact('genres'));
     }
 
     /**
@@ -33,7 +35,7 @@ class BookController extends Controller
             'title' => 'required',
             'author' => 'required',
             'year' => 'required|numeric|integer',
-            'genre' => 'required',
+            'genre_id' => 'required|exists:genres,id',
             'note' => 'required|numeric|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
@@ -47,7 +49,7 @@ class BookController extends Controller
             'title' => $request->title,
             'author' => $request->author,
             'year' => $request->year,
-            'genre' => $request->genre,
+            'genre_id' => $request->genre,
             'note' => $request->note,
             'tag' => $request->tag,
             'image' => $fileName
@@ -57,20 +59,19 @@ class BookController extends Controller
             ->with('success', "Le book a été créé");
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Book $book)
     {
+
+        $book['genre_id'] = $book->getGenre();
 
         return view('book.show', compact('book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Book $book)
     {
+        // $tag = Tag::findOrFail($book->tag_id);
+
+        $genre = Genre::all()->sortBy('name');
         return view('book.edit', compact('book'));
     }
 
@@ -83,7 +84,7 @@ class BookController extends Controller
             'title' => 'required',
             'author' => 'required',
             'year' => 'required',
-            'genre' => 'required',
+            'genre_id' => 'required|exists:genres,id',
             'note' => 'required',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'

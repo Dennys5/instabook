@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Genre extends Model
+class Note extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['note'];
 
-    public function genre(): HasMany
+    public function note(): HasMany
     {
         return $this->HasMany(Book::class);
     }

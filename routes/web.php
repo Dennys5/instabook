@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Book;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,13 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    if (request('search')) {
-        $book = Book::where('title', 'like', '%' . request('search') . '%')->get();
-    } else {
-        $book = Book::all();
-    }
-    return redirect(route('book.index'))->with('book', $book);;
+    return redirect(route('book.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::post('/search', SearchController::class);
 
 Route::middleware('auth')->group(function () {
     Route::resource('book', BookController::class);

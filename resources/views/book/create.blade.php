@@ -24,10 +24,15 @@
         <p>{{$errors->first('year')}}</p>
     @endif
     <br>
-    Genre: <input type='name' name='genre' placeholder='Genre' value='{{old('genre')}}'><br>
-    @if($errors->has('genre'))
-        <p>{{$errors->first('genre')}}</p>
-    @endif
+    Genre: <select name='genre'>
+        @foreach ($genres as $genre)
+        <option value='{{$genre['id']}}' 
+        @if($genre['id']==old('genre_id'))
+        selected
+        @endif
+        >{{$genre['name']}}</option>
+        @endforeach
+    </select><br>
     Tag: <input type='text' name='tag' placeholder='Tag' value='{{old('tag')}}'><br>
     @if($errors->has('tag'))
         <p>{{$errors->first('tag')}}</p>

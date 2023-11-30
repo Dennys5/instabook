@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 
         Book::factory(20)->create();
+        Author::factory(15)->create();
 
         $this->call([
             BookSeeder::class,
