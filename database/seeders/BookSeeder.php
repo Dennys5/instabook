@@ -9,9 +9,9 @@ use Illuminate\Database\Seeder;
 class BookSeeder extends Seeder
 {
     public $book = [
-        '1' => ['title' => 'Les Infidèles', 'year' => 1524, 'genre' => 'Drama', 'tag' => 'ouf'],
-        '2' => ['title' => 'Ne Jamais Dire Toujours', 'year' => 1924, 'genre' => 'Opéra', 'tag' => 'ouf'],
-        '3' => ['title' => 'Encore Oit', 'year' => 2004, 'genre' => 'Suspense', 'tag' => 'ouf']
+        '1' => ['title' => 'Les Infidèles', 'year' => 1524,  'tag' => 'ouf'],
+        '2' => ['title' => 'Ne Jamais Dire Toujours', 'year' => 1924, 'tag' => 'ouf'],
+        '3' => ['title' => 'Encore Oit', 'year' => 2004, 'tag' => 'ouf']
     ];
     public function run(): void
     {
@@ -19,8 +19,6 @@ class BookSeeder extends Seeder
             Book::factory()->create([
                 'title' => $details['title'],
                 'year' => $details['year'],
-                'genre' => $details['genre'],
-                'note' => $details['note'],
                 'tag' => $details['tag']
             ]);
         }

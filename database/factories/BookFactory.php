@@ -19,7 +19,6 @@ class BookFactory extends Factory
         return [
             'title' => fake()->text(20),
             'year' => fake()->numberBetween(1487, 2023),
-            'genre' => fake()->text(10),
             'tag' => fake()->text(10),
             'image' => fake()->url()
         ];
