@@ -11,7 +11,7 @@
         <a class="link" href="{{route('book.show', $details->id)}}" style="color: white"><p>{{$details->title}}</p></a>
       </div>
       <p>{{$details->image}}</p>
-      <div class="book-cover cover1" style="background: ('{{$details->image}}')">
+      <div class="book-cover cover1" style="background: url('{{asset("storage/images/".$details->image)}}')">
         <div class="effect"></div>
         <div class="light"></div>
       </div>

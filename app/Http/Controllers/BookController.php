@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
@@ -26,8 +27,8 @@ class BookController extends Controller
     public function create()
     {
         $genres = Genre::all()->sortBy('name');
-
-        return view('book.create', compact('genres'));
+        $author = Author::all()->sortBy('name');
+        return view('book.create', compact('genres', 'author'));
     }
 
     /**
@@ -37,10 +38,10 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'author' => 'required',
+            'author' => 'required|exists:authors,id',
             'year' => 'required|numeric|integer',
-            'genre_id' => 'exists:genres,id',
-            'note' => 'required|numeric|integer',
+            'genre' => 'required|exists:genres,id',
+            'note' => 'required|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
         ]);
@@ -48,13 +49,19 @@ class BookController extends Controller
         $fileName = time() . '.' . $request->image->extension();
         $request->image->storeAs('public/images', $fileName);
 
+        $user_id = Auth::user()->id;
+
+        $note = Note::create([
+            'note' => $request->note,
+            'user_id' => $user_id
+        ]);
 
         $book =  Book::create([
             'title' => $request->title,
-            'author' => $request->author,
+            'author_id' => $request->author,
             'year' => $request->year,
             'genre_id' => $request->genre,
-            'note' => $request->note,
+            'note_id' => $note->id,
             'tag' => $request->tag,
             'image' => $fileName
         ]);
@@ -67,6 +74,8 @@ class BookController extends Controller
     {
 
         $book['genre_id'] = $book->getGenre();
+        $book['author_id'] = $book->getAuthor();
+        $book['note_id'] = $book->getNote();
 
         return view('book.show', compact('book'));
     }
@@ -76,6 +85,7 @@ class BookController extends Controller
         $author = Author::findOrFail($book->author_id);
         $genre = Genre::findOrFail($book->genre_id);
         $tag = Tag::finOrFail($book->tag_id);
+        $note = Note::findOrFail($book->note_id);
 
         return view('book.edit', compact('book'));
     }
@@ -87,10 +97,10 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'author' => 'required',
+            'author_id' => 'required|exists:authors,id',
             'year' => 'required',
             'genre_id' => 'required|exists:genres,id',
-            'note' => 'required',
+            'note_id' => 'required|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);

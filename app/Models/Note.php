@@ -11,7 +11,7 @@ class Note extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['note'];
+    protected $fillable = ['note', 'user_id'];
 
     public function note(): HasMany
     {
