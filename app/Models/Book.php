@@ -12,7 +12,7 @@ class Book extends Model
     use HasFactory;
 
     protected $table = 'books';
-    protected $fillable = ['title', 'author_id', 'year', 'genre', 'note', 'tag', 'image'];
+    protected $fillable = ['title', 'author_id', 'year', 'genre_id', 'note_id', 'user_id', 'tag', 'image'];
 
     public function Genre(): HasOne
     {

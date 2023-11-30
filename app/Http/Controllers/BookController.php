@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Genre;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Genre;
+use App\Models\Note;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -23,6 +26,7 @@ class BookController extends Controller
     public function create()
     {
         $genres = Genre::all()->sortBy('name');
+
         return view('book.create', compact('genres'));
     }
 
@@ -35,7 +39,7 @@ class BookController extends Controller
             'title' => 'required',
             'author' => 'required',
             'year' => 'required|numeric|integer',
-            'genre_id' => 'required|exists:genres,id',
+            'genre_id' => 'exists:genres,id',
             'note' => 'required|numeric|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
@@ -69,9 +73,10 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        // $tag = Tag::findOrFail($book->tag_id);
+        $author = Author::findOrFail($book->author_id);
+        $genre = Genre::findOrFail($book->genre_id);
+        $tag = Tag::finOrFail($book->tag_id);
 
-        $genre = Genre::all()->sortBy('name');
         return view('book.edit', compact('book'));
     }
 
