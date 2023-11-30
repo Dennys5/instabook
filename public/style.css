@@ -24,19 +24,44 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+/* CSS CREATE */
 .create-box{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 5%;
   margin-bottom: 20%;
+/*   background-color: #f6f4e6; */
+background: url('https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&');
+  width: 52vw;
+  height: 95vh;
+  margin-left: 25%;
+  border-radius: 20px;
 }
 
-.label{
-  color: #f6f4e6;
+.create{
+  display: flex;
+  flex-direction: row;
 }
 
+.create-box div{
+  display: flex;
+  flex-direction: column;
+}
+
+.auteur{
+  border-radius: 3%;
+}
+
+.avant{
+  z-index: 2;
+}
+
+input .bouton{
+  border: 1px solid #272727  !important;
+  color: #111;
+}
 /* css footer */
 .container1 {
     height: 10%;

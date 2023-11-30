@@ -18,7 +18,16 @@
         <p>{{$errors->first('title')}}</p>
     @endif
     <br>
-    <span class="label">Author: </span><input type='name' name='author' placeholder='Auteur' value='{{old('author')}}'><br>
+    {{-- <span class="label">Author: </span><input type='name' name='author' placeholder='Auteur' value='{{old('author')}}'><br> --}}
+    <span class="label">Auteur: </span><select name='author'>
+        @foreach ($author as $authors)
+        <option value='{{$authors['id']}}' 
+        @if($authors['id']==old('author_id'))
+        selected
+        @endif
+        >{{$authors['name']}}</option>
+        @endforeach
+    </select><br>
     <span class="label">Année:</span> <input type='number' name='year' placeholder="Année" value='{{old('year')}}'>
     @if($errors->has('year'))
         <p>{{$errors->first('year')}}</p>
