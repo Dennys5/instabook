@@ -18,7 +18,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -37,7 +37,7 @@
 
             <div class="footer-dark">
                 <footer>
-                    <div class="container">
+                    <div class="container1">
                         <div class="row">
                             <div class="col-sm-6 col-md-3 item">
                                 <h3>Services</h3>
