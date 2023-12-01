@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class GenreSeeder extends Seeder
 {
 
-    private $list = ['Fantasy', 'Romans policiers', 'Horreur', 'Suspense', 'Thriller', 'Comédie', 'Bandes dessinées', 'Mangas', 'Nature et animaux', 'Science-Fiction', 'Sports', 'Cuisine', 'Drama'];
+    private $list = ['Fantasy', 'Romans policiers', 'Horreur', 'Théâtre', 'Poésie', 'Comédie', 'Bandes Dessinées', 'Mangas', 'Nature et animaux', 'Science-Fiction', 'Sports', 'Cuisine', 'Drama'];
     /**
      * Run the database seeds.
      */

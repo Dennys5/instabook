@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Genre;
 use App\Models\Note;
 use App\Models\Tag;
+use App\Models\Synopsis;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -41,6 +42,7 @@ class BookController extends Controller
             'author' => 'required|exists:authors,id',
             'year' => 'required|numeric|integer',
             'genre' => 'required|exists:genres,id',
+            'synopsis' => 'required',
             'note' => 'required|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
@@ -56,11 +58,16 @@ class BookController extends Controller
             'user_id' => $user_id
         ]);
 
+        $synopsis = Synopsis::create([
+            'synopsis' => $request->synopsis
+        ]);
+
         $book =  Book::create([
             'title' => $request->title,
             'author_id' => $request->author,
             'year' => $request->year,
             'genre_id' => $request->genre,
+            'synopsis_id' => $synopsis->id,
             'note_id' => $note->id,
             'tag' => $request->tag,
             'image' => $fileName
@@ -72,22 +79,20 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-
         $book['genre_id'] = $book->getGenre();
         $book['author_id'] = $book->getAuthor();
         $book['note_id'] = $book->getNote();
+        $book['synopsis_id'] = $book->getSynopsis();
 
         return view('book.show', compact('book'));
     }
 
     public function edit(Book $book)
     {
-        $author = Author::findOrFail($book->author_id);
-        $genre = Genre::findOrFail($book->genre_id);
-        $tag = Tag::finOrFail($book->tag_id);
-        $note = Note::findOrFail($book->note_id);
+        $genres = Genre::all()->sortBy('name');
+        $author = Author::all()->sortBy('name');
 
-        return view('book.edit', compact('book'));
+        return view('book.edit', compact('book', 'genres', 'author'));
     }
 
     /**
@@ -100,6 +105,7 @@ class BookController extends Controller
             'author_id' => 'required|exists:authors,id',
             'year' => 'required',
             'genre_id' => 'required|exists:genres,id',
+            'synopsis_id' => 'required',
             'note_id' => 'required|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -109,6 +115,7 @@ class BookController extends Controller
         $book->author = $request->author;
         $book->year = $request->year;
         $book->genre = $request->genre;
+        $book->synopsis = $request->synopsis;
         $book->note = $request->note;
         $book->tag = $request->tag;
         $book->image = $request->image;
@@ -131,6 +138,8 @@ class BookController extends Controller
 
     public function rate(Book $book)
     {
+
+        $rate = $book->getAllNote();
         return redirect(route('book.show', compact('book')));
     }
 }

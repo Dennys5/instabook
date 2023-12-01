@@ -4,8 +4,12 @@
 }
 
 .logo1 {
-    height: 80px;
+    height: 72px;
     width: 129px;
+}
+
+.shrink-0 {
+    margin-top: 10px;
 }
 
 h1 {
@@ -20,63 +24,57 @@ h1 {
 }
 
 body {
-  background: #272727;
-  font-family: "Montserrat", sans-serif;
+    background: #272727;
+    font-family: "Montserrat", sans-serif;
 }
 
 /* CSS CREATE */
-.create-box{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
-  margin-bottom: 20%;
-/*   background-color: #f6f4e6; */
-background: url('https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&');
-  width: 52vw;
-  height: 95vh;
-  margin-left: 25%;
-  border-radius: 20px;
+.create-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 20%;
+    /*   background-color: #f6f4e6; */
+    background: url("https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&");
+    width: 52vw;
+    height: 95vh;
+    margin-left: 25%;
+    border-radius: 20px;
 }
 
-.create{
-  display: flex;
-  flex-direction: row;
+.create {
+    display: flex;
+    flex-direction: row;
 }
 
-.create-box div{
-  display: flex;
-  flex-direction: column;
+.create-box div {
+    display: flex;
+    flex-direction: column;
 }
 
-.auteur{
-  border-radius: 3%;
+.auteur {
+    border-radius: 3%;
 }
 
-.avant{
-  z-index: 2;
+.avant {
+    z-index: 2;
 }
 
-input .bouton{
-  border: 1px solid #272727  !important;
-  color: #111;
+input .bouton {
+    border: 1px solid #272727 !important;
+    color: #111;
 }
+
 /* css footer */
 .container1 {
     height: 10%;
 }
 
-.bigCont{
-  margin-top: 23px;
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-}
-
-.footer-dark{
-  margin-top: 3%;
-  color: #f6f4e6 ;
+.footer-dark {
+    margin-top: 3%;
+    color: #f6f4e6;
 }
 
 .footer-dark h3 {
@@ -172,6 +170,7 @@ input .bouton{
     flex-direction: row;
     text-align: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .details {
@@ -179,16 +178,32 @@ input .bouton{
     flex-direction: column;
     background-image: url("https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&");
     color: #2b2b2b;
-    width: 39vw;
-    height: 50vh;
+    width: 45vw;
+    height: 55vh;
+    padding-left: 20px;
+    padding-right: 20px;
     justify-content: center;
+    text-align: justify;
     background-repeat: no-repeat;
     background-size: cover;
     margin-right: 40px;
+    margin-bottom: 150px;
 }
 
-.details h1 {
-    color: #2b2b2b !important;
+.headline {
+    margin-top: 40px;
+    margin-left: 1000px;
+    display: flex;
+    gap: 30px;
+}
+
+.edit button {
+    padding: 5px 5px;
+    background-color: #f2ebf4;
+}
+
+.showTitle h1 {
+    font-size: 35px;
 }
 
 .container-show .book-show {
@@ -355,39 +370,44 @@ css index */
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-wrap: wrap;
+    gap: 70px;
     justify-content: center;
     align-items: center;
+    margin-top: 70px;
 }
 
 .title a {
     text-decoration: none;
 }
 
+.down {
+    width: 100vw;
+    height: 50vh;
+}
+
 .book-index {
-    width: 225px;
-    height: 350px;
+    width: 200px;
+    height: 300px;
     position: relative;
     text-align: center;
     margin: 2.5%;
 }
 
 .book-cover {
-  position: absolute;
-  z-index:1;
-  width: 100%;
-  height: 100%;
-  transform-origin: 0 50%;
-  -webkit-transform-origin: 0 50%;
-  background: #111;
-  background-size:cover;
-  border-radius: 3px;
-  box-shadow: 
-    inset 4px 1px 3px #ffffff60,
-    inset 0 -1px 2px #00000080;
-  transition: all .5s ease-in-out;
-  -webkit-transition: all .5s ease-in-out;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 50%;
+    -webkit-transform-origin: 0 50%;
+    background: #111;
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: inset 4px 1px 3px #ffffff60, inset 0 -1px 2px #00000080;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
 }
-
 
 .book-index .book-cover {
     background-size: 100% 100%;

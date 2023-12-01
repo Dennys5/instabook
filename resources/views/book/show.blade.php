@@ -3,12 +3,19 @@
 @section('title', 'Détails d\'un Book')
 
 @section('content')
+<div class="headline">
+    <div class="showTitle">
+        <h1>{{$book['title']}}</h1>
+    </div>
+    <div class="edit">
+        <a href="{{route('book.edit', $book->id)}}"><button>Modifier</button></a>
+    </div>
+</div>
+
 <div class="container-show">
     <div class="book-show">
         <div class="front">
-            <div class="cover-show">
-                <img src="{{asset("storage/images/".$book['image'])}}" alt="">
-                    <p class='author'>{{$book['author_id']}}</p>
+            <div class="cover-show" style="background: url('{{asset("storage/images/".$book['image'])}}') ; background-size: cover ; background-repeat: no-repeat">
             </div>
         </div>
         <div class="left-side">
@@ -18,10 +25,12 @@
             </h2>
         </div>
     </div>
+   
 <div class="details">
-    <h1>{{$book['title']}}</h1>
+    
     <ul>
         <li>Auteur : {{$book['author_id']}}</li>
+        <li>Synopsis : {{$book['synopsis_id']}}</li>
         <li>Genre : {{$book['genre_id']}}</li>
         <li>Année : {{$book['year']}}</li>
         <li>Note : {{$book['note_id']}}</li>

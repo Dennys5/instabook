@@ -13,13 +13,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Book::factory(20)->create();
 
         $this->call([
-            BookSeeder::class,
-            GenreSeeder::class,
-            AuthorSeeder::class,
-            TagSeeder::class
+            // GenreSeeder::class,
+            // AuthorSeeder::class,
+            // TagSeeder::class,
+            // SynopsisSeeder::class,
+            // BookSeeder::class,
+            NoteSeeder::class
         ]);
     }
 }

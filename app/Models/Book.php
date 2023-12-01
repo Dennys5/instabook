@@ -12,7 +12,7 @@ class Book extends Model
     use HasFactory;
 
     protected $table = 'books';
-    protected $fillable = ['title', 'author_id', 'year', 'genre_id', 'note_id', 'user_id', 'tag_id', 'image'];
+    protected $fillable = ['title', 'author_id', 'year', 'genre_id', 'note_id', 'user_id', 'tag_id', 'synopsis_id', 'image'];
 
     public function Genre(): HasOne
     {
@@ -65,8 +65,27 @@ class Book extends Model
 
     public static function getAllNote()
     {
-        return Book::select('books.*', 'notes.name as notes')
+        return Book::select('books.*', 'notes.note as note')
             ->join('notes', 'books.note_id', '=', 'notes.id')
+            ->orderBy('number')
+            ->get();
+    }
+
+    public function Synopsis(): HasOne
+    {
+        return $this->HasOne(Synopsis::class);
+    }
+
+    public function getSynopsis()
+    {
+        $synopsis = Synopsis::find($this->synopsis_id);
+        return $synopsis->synopsis;
+    }
+
+    public static function getAllSynopsis()
+    {
+        return Book::select('books.*', 'synopses.synopsis as synopsis')
+            ->join('synopses', 'books.synopsis_id', '=', 'synopses.id')
             ->orderBy('name')
             ->get();
     }

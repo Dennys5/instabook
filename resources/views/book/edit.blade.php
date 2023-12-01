@@ -12,41 +12,71 @@
     </ul>
   @endif
 
-  <form class="editForm" action='{{route("book.update", $book['id'])}}' method='post'>
+  <form class="editForm" action='{{route("book.update", $book['id'])}}' method='post' enctype="multipart/form-data">
     @csrf
     @method('put')
-    Titre :
+
+    <span class="label">Titre :</span>
     <input type='text' name='title' placeholder='Titre du book' value='{{old('title',$book['title'])}}'>
     @if($errors->has('title'))
         <p>{{$errors->first('title')}}</p>
     @endif
     <br>
-    Année :
+
+    <span class="label">Auteur: </span>
+    <select name='author'>
+      @foreach ($author as $authors)
+      <option value='{{$authors['id']}}' 
+      @if($authors['id']==old('author_id'))
+      selected
+      @endif
+      >{{$authors['name']}}</option>
+      @endforeach
+  </select><br>
+
+  <span class="label">Genre: </span>
+  <select name='genre'>
+    @foreach ($genres as $genre)
+    <option value='{{$genre['id']}}' 
+    @if($genre['id']==old('genre_id'))
+    selected
+    @endif
+    >{{$genre['name']}}</option>
+    @endforeach
+</select><br>
+
+    <span class="label">Synopsis :</span>
+    <input type='textarea' name='synopsis' placeholder="Année" value='{{old('synopsis')}}'>
+   @if($errors->has('synopsis'))
+       <p>{{$errors->first('synopsis')}}</p>
+   @endif
+   <br>
+
+  <span class="label">Année :</span>
     <input type='number' name='year' placeholder="Année" value='{{old('year',$book['year'])}}'>
     @if($errors->has('year'))
         <p>{{$errors->first('year')}}</p>
     @endif
     <br>
-    Auteur :
-<input type='text' name='author' placeholder="Auteur" value='{{old('author',$book['author'])}}'>
-    @if($errors->has('author'))
-        <p>{{$errors->first('author')}}</p>
+
+    <span class="label">Tag: </span>
+    <input type='text' name='tag' placeholder='Tag' value='{{old('tag')}}'><br>
+    @if($errors->has('tag'))
+        <p>{{$errors->first('tag')}}</p>
     @endif
-    <br>
-    Genre :
-<input type='text' name='genre'  placeholder="Genre" value='{{old('genre',$book['genre'])}}'><br>
-@if($errors->has('genre'))
-<p>{{$errors->first('genre')}}</p>
-@endif
-Note :
-<input type='number' name='note'  placeholder="Note" value='{{old('note',$book['note'])}}'><br>
+
+   <span class="label">Note :</span>
+<input type='number' name='note'  placeholder="Note" value='{{old('note')}}'><br>
 @if($errors->has('note'))
 <p>{{$errors->first('note')}}</p>
 @endif
+
 <input type="file" name="image" accept="image/png, image/jpeg">
 @if($errors->has('image'))
     <p>{{$errors->first('image')}}</p>
 @endif
+
     <input type='submit' value='Modifier the motherfucker'>
     </form>
+
     @endsection

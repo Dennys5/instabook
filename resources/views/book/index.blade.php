@@ -2,22 +2,26 @@
 @section('title', 'Books')
 @section('content')
 
-<div class="bigCont">
+<div class="container-index">
     
 @foreach($book as $books => $details)
-<div class="container-index">
+
     <div class="book-index">
       <div class="title">
         <a class="link" href="{{route('book.show', $details->id)}}" style="color: white"><p>{{$details->title}}</p></a>
       </div>
-      <p>{{$details->image}}</p>
-      <div class="book-cover cover1" style="background: url('{{asset("storage/images/".$details->image)}}')">
+      <div class="book-cover cover1" style="background: url('{{asset("storage/images/".$details->image)}}') ; background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%">
         <div class="effect"></div>
         <div class="light"></div>
       </div>
       <div class="book-inside">
       </div>
     </div>
-</div>
+ 
+  
 @endforeach
+  </div>
+
 @endsection
