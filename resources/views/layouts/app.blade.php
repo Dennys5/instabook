@@ -34,8 +34,7 @@
             <main>
                 @yield('content')
             </main>
-
-            {{-- <div class="footer-dark">
+            <div class="footer-dark">
                 <footer>
                     <div class="container1">
                         <div class="row">
@@ -65,7 +64,8 @@
                     </div>
                 </footer>
             </div>
-            
-        </div> --}}
+        </div>
+        
+        
     </body>
 </html>

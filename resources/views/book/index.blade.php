@@ -22,6 +22,11 @@
  
   
 @endforeach
-  </div>
+</div>
+
+<div class="pagination-container">
+    {{-- {{ $book->::appends(request()->query())->links() }} --}}
+    {{$book = DB::table('books')->simplePaginate(8)}};
+</div>
 
 @endsection
