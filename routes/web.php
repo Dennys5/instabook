@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('book.index'));
 });
 
 Route::get('/dashboard', function () {
@@ -27,10 +27,22 @@ Route::get('/dashboard', function () {
 // Route::post('/search', SearchController::class);
 
 Route::middleware('auth')->group(function () {
-    Route::resource('book', BookController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'role:creator'])->group(function () {
+    Route::get('book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
+    Route::delete('book/destroy/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+});
+
+Route::middleware(['auth', 'role:edit'])->group(function () {
+    Route::get('/private', function () {
+        return "Bonjour Admin";
+    });
+});
+
 require __DIR__ . '/auth.php';
+Route::resource('book', BookController::class);
+Route::patch('/book/{id}/note', [BookController::class, 'store_note'])->name('book.store_note');

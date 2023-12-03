@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Note extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['note', 'user_id', 'book_id'];
+    protected $fillable = ['comment', 'user_id', 'book_id'];
 
-    public function note(): HasMany
+    public function book(): HasMany
     {
         return $this->HasMany(Book::class);
     }

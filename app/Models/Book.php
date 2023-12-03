@@ -63,13 +63,13 @@ class Book extends Model
         return $note->note;
     }
 
-    public static function getAllNote()
-    {
-        return Book::select('books.*', 'notes.note as note')
-            ->join('notes', 'books.note_id', '=', 'notes.id')
-            ->orderBy('number')
-            ->get();
-    }
+    // public static function getAllNote()
+    // {
+    //     return Book::select('books.note_id', 'notes.note as note')
+    //         ->join('notes', 'books.note_id', '=', 'notes.id')
+    //         ->orderBy('note')
+    //         ->get();
+    // }
 
     public function Synopsis(): HasOne
     {
@@ -82,11 +82,14 @@ class Book extends Model
         return $synopsis->synopsis;
     }
 
-    public static function getAllSynopsis()
+    public function Comment(): HasOne
     {
-        return Book::select('books.*', 'synopses.synopsis as synopsis')
-            ->join('synopses', 'books.synopsis_id', '=', 'synopses.id')
-            ->orderBy('name')
-            ->get();
+        return $this->HasOne(Comment::class);
+    }
+
+    public function getComment()
+    {
+        $comment = Comment::find($this->comment_id);
+        return $comment->comment;
     }
 }

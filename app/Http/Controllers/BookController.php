@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Note;
 use App\Models\Tag;
@@ -19,6 +20,7 @@ class BookController extends Controller
     public function index()
     {
         $book = Book::all()->sortBy('name');
+        $book = Book::paginate(8); // Paginer les résultats
         return view('book.index', compact('book'));
     }
 
@@ -35,8 +37,9 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Book $book)
     {
+
         $request->validate([
             'title' => 'required',
             'author' => 'required|exists:authors,id',
@@ -51,23 +54,29 @@ class BookController extends Controller
         $fileName = time() . '.' . $request->image->extension();
         $request->image->storeAs('public/images', $fileName);
 
-        $user_id = Auth::user()->id;
+        $user_id = Auth::id();
+
+
 
         $note = Note::create([
             'note' => $request->note,
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'book_id' => $request->book_id
         ]);
 
         $synopsis = Synopsis::create([
             'synopsis' => $request->synopsis
         ]);
 
+
         $book =  Book::create([
             'title' => $request->title,
             'author_id' => $request->author,
             'year' => $request->year,
             'genre_id' => $request->genre,
+            'user_id' => $user_id,
             'synopsis_id' => $synopsis->id,
+            'book_id' => $note->book_id,
             'note_id' => $note->id,
             'tag' => $request->tag,
             'image' => $fileName
@@ -83,8 +92,28 @@ class BookController extends Controller
         $book['author_id'] = $book->getAuthor();
         $book['note_id'] = $book->getNote();
         $book['synopsis_id'] = $book->getSynopsis();
+        // $book['comment_id'] = $book->getComment();
 
-        return view('book.show', compact('book'));
+        $note = Note::where('book_id', $book->id)->avg('note');
+        // $notes = Note::findOrFail($book->id)->get();
+
+        // $note = 0;
+        // foreach ($notes as $key) {
+        //     dd($key);
+        //     $note += $key->note;
+        // }
+
+        // $numberNote = $notes->count();
+        // if ($numberNote != 0) {
+        //     $result = $note / $numberNote;
+        // } else {
+        //     $result = "Aucune note";
+        // }
+
+        return view('book.show')->with([
+            'book' => $book,
+            'moyenne' => $note
+        ]);
     }
 
     public function edit(Book $book)
@@ -106,16 +135,19 @@ class BookController extends Controller
             'year' => 'required',
             'genre_id' => 'required|exists:genres,id',
             'synopsis_id' => 'required',
+            'comment_id' => 'required',
             'note_id' => 'required|integer',
             'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
 
         $book->title = ucwords(strtolower($request->title));
         $book->author = $request->author;
         $book->year = $request->year;
         $book->genre = $request->genre;
         $book->synopsis = $request->synopsis;
+        $book->comment = $request->comment;
         $book->note = $request->note;
         $book->tag = $request->tag;
         $book->image = $request->image;
@@ -136,10 +168,23 @@ class BookController extends Controller
             ->with(['success', 'Livre supprimé avec succès']);
     }
 
-    public function rate(Book $book)
+    public function store_note(Request $request, Int $id)
     {
+        $book = Book::find($id);
+        $request->validate([
+            'note' => 'required|integer'
+        ]);
+        $user_id = Auth::id();
 
-        $rate = $book->getAllNote();
-        return redirect(route('book.show', compact('book')));
+
+        $book['note_id'] = $book->getNote();
+
+        $note = Note::create([
+            'note' => $request->note,
+            'user_id' => $user_id,
+            'book_id' => $book->id
+        ]);
+
+        return view('book.show', compact('book'));
     }
 }

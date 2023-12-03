@@ -4,11 +4,12 @@
 
 @section('content')
 
-<h2>Enregistrement du fucking book {{$title}}</h2>
+<h2>Enregistrement du fucking book {{$book['title']}}</h2>
 <ul>
-  <li>Author : {{$author}}</li>
-  <li>Genre : {{$genre}}</li>
-  <li>Year : {{$year}}</li>
-  <li>Note : {{$note}}</li>
+  <li>Author : {{$book['author_id']}}</li>
+  <li>Genre : {{$book['genre_id']}}</li>
+  <li>Synopsis : {{$book['synopsis_id']}}</li>
+  <li>Year : {{$book['year']}}</li>
+  <li>Note : {{$book['note_id']}}</li>
 </ul>
 @endsection
