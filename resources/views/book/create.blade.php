@@ -22,7 +22,7 @@
     <br>
 
     <span class="label">Auteur: </span>
-    <select name='author'>
+    <select class="auteur" name='author'>
         @foreach ($author as $authors)
         <option value='{{$authors['id']}}' 
         @if($authors['id']==old('author_id'))
@@ -75,7 +75,7 @@
     @if($errors->has('image'))
         <p>{{$errors->first('image')}}</p>
     @endif
-    <input type='submit' value='Créer'>
+    <input class="bouton" type='submit' value='Créer'>
 
     </form>
 </div>

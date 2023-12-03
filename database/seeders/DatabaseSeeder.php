@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            // GenreSeeder::class,
-            // AuthorSeeder::class,
-            // TagSeeder::class,
-            // SynopsisSeeder::class,
-            // BookSeeder::class,
-            NoteSeeder::class
+            /* GenreSeeder::class,
+            AuthorSeeder::class,
+            TagSeeder::class,
+            SynopsisSeeder::class, */
+            BookSeeder::class,
+            /* NoteSeeder::class */
         ]);
     }
 }
