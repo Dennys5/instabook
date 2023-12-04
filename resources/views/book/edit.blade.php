@@ -31,15 +31,15 @@
   
   <div class="big">
       <div class="title-cont">
-          <div class="title-title">
-              Titre
-          </div>
-          <div class="title-input">
-            <input type="text" name="title" placeholder="ex : Laravel Pour Les Nuls">
-              @if($errors->has('title'))
-                <p>{{$errors->first('title')}}</p>
-              @endif
-          </div>
+        <div class="title-title">
+            Titre
+        </div>
+        <div class="title-input">
+          <input type="text" name="title" placeholder="ex : Laravel Pour Les Nuls">
+            @if($errors->has('title'))
+              <p>{{$errors->first('title')}}</p>
+            @endif
+        </div>
       </div>    
   
       <div class="synopsis-cont">
@@ -100,7 +100,7 @@
       </div>
       <div class="submit-btn">
         <input type="submit" value="Modifier" id="submit-btn">
-          @endif
+
         
       </div>
   </div> 

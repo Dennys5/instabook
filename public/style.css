@@ -73,7 +73,7 @@ body {
 }
 
 .phrase {
-    margin-right: 70%;
+    margin-right: 67%;
 }
 
 .post {
@@ -94,11 +94,23 @@ body {
     background-color: white;
     border-radius: 4px;
 }
-
+.title-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
 .title-cont {
     margin-left: 2.5%;
     display: flex;
     align-items: baseline;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 2rem;
+    width: 95%;
+}
+
+.title-input input {
+    margin-left: 2rem;
+    border: none;
+    border-bottom: 1px solid #878787;
 }
 
 .synopsis-cont {
@@ -107,12 +119,14 @@ body {
 }
 
 .syn-input {
-    margin-top: 6% !important;
+    margin-top: 2% !important;
     margin-left: 40% !important;
 }
 
 .syn-title {
     margin-top: 7% !important;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .select {
@@ -695,7 +709,6 @@ p {
     flex-direction: row;
     text-align: center;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 .details {
@@ -704,17 +717,16 @@ p {
     background-image: url("https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&");
     color: #2b2b2b;
     width: 45vw;
-    height: 70vh;
-    padding-top: 50px;
+    height: 35rem;
     padding-left: 50px;
     padding-right: 50px;
-    padding-bottom: 50px;
     justify-content: center;
     text-align: justify;
     background-repeat: no-repeat;
     background-size: cover;
     margin-right: 60px;
     margin-bottom: 100px;
+    margin-top: 7rem;
     border-radius: 12px;
 }
 
@@ -742,10 +754,12 @@ p {
     justify-content: center;
     gap: 10%;
     margin-top: 7%;
+    border-top: 0.1rem solid #1f2937;
+    padding-top: 1rem;
 }
 
 .show-syn {
-    margin-top: 10%;
+    margin-top: 1rem;
 }
 
 .show-sync p {
