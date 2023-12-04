@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignIdFor(Book::class)->constrained();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Book::class)->nullable()->constrained();
+            $table->foreignIdFor(User::class)->nullable()->constrained();
         });
     }
 

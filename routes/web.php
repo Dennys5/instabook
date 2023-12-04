@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:creator'])->group(function () {
-    Route::get('book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
+    Route::put('book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
     Route::delete('book/destroy/{book}', [BookController::class, 'destroy'])->name('book.destroy');
 });
 

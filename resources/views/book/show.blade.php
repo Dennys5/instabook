@@ -7,13 +7,6 @@
     <div class="showTitle">
         <h1>Détails du livre</h1>
     </div>
-    @if (Auth::check())
-    @if(Auth::User()->id == $book->user_id)
-    <div class="edit">
-        <a href="{{route('book.edit', $book->id)}}"><button type="submit" id="submit-btn">Modifier</button></a>
-    </div>
-    @endif
-    @endif
 </div>
 
 <div class="container-show">
@@ -31,7 +24,30 @@
     </div>
    
 <div class="details">
-    
+      @if (Auth::check())
+    @if(Auth::User()->id == $book->user_id)
+    <div class="edit">
+        <div class="edit-cont">
+            <form action="{{route('book.edit', $book['id'])}}" method="post" class="tool">
+                @csrf
+                @method('put')
+                <button type="submit" id="submit-btn" class="show-btn">
+                    Modifier
+                </button>
+            </form>
+        </div>
+        <div class="delete-cont">
+            <form action="{{route('book.index', $book['id'])}}" method="post" class="tool">
+                @csrf
+                @method('delete')
+                <button type="submit" id="submit-btn" class='show-btn'>
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+    @endif
+    @endif
         <div class="show-syn">
             <p><span>synopsis :</span> {{$book['synopsis_id']}}</p>
         </div>
@@ -42,27 +58,14 @@
            <p><span>Note :</span> {{$moyenne}} /5</p>
         </div>
 
-    @if (Auth::check())
-    @if(Auth::User()->id == $book->user_id)
-    <form action="{{route('book.destroy', $book['id'])}}" method="post" class="tool">
-        @csrf
-        @method('delete')
-        <button type="submit" id="submit-btn">
-        Supprimer
-        </button>
-    </form>
-    @endif
-    @endif
-
     <form action='{{route('book.store_note', $book->id)}}' method='post'>
         @csrf
         @method('patch')
         <div class="bottom-cont">
-            <input type="number" name="note" placeholder="Noter" min="0" max="5">
-            <input type="text" name="comment" placeholder="Commenter">
+            <input type="number" name="note" placeholder="Noter /" min="0" max="5">
+            <button type="submit" id="submit-btn">Valider</button>
         </div>
         
-        <button type="submit" id="submit-btn">Valider</button>
     </form>
 </div>
 </div>

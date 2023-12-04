@@ -11,7 +11,8 @@ class Comment extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['comment', 'user_id', 'book_id'];
+    protected $table = 'comments';
+    protected $fillable = ['comment', 'book_id',  'user_id'];
 
     public function book(): HasMany
     {

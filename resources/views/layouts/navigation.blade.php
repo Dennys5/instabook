@@ -50,7 +50,8 @@ use Illuminate\Support\Facades\Auth;
                                 </div>
                             </button>
                         </x-slot> 
-                                            
+                        <?php }
+                        ?>   
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Mon Profil') }}
@@ -60,8 +61,7 @@ use Illuminate\Support\Facades\Auth;
                             {{ __('Publier un livre') }}
                         </x-dropdown-link>
                         
-                        <?php }
-                        ?>
+                      
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

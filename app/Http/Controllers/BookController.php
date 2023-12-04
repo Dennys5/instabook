@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Author;
 use App\Models\Book;
-use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Note;
 use App\Models\Synopsis;
@@ -89,13 +88,12 @@ class BookController extends Controller
         $book['author_id'] = $book->getAuthor();
         $book['note_id'] = $book->getNote();
         $book['synopsis_id'] = $book->getSynopsis();
-        // $book['comment_id'] = $book->getComment();
 
         $note = Note::where('book_id', $book->id)->avg('note');
 
         return view('book.show')->with([
             'book' => $book,
-            'moyenne' => $note
+            'moyenne' => $note,
         ]);
     }
 
@@ -118,7 +116,6 @@ class BookController extends Controller
             'year' => 'required',
             'genre_id' => 'required|exists:genres,id',
             'synopsis_id' => 'required',
-            'comment_id' => 'required',
             'note_id' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -153,7 +150,8 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $request->validate([
-            'note' => 'required|integer'
+            'note' => 'required|integer',
+            'comment' => 'required|string'
         ]);
 
         $user_id = Auth::id();
@@ -161,6 +159,7 @@ class BookController extends Controller
         $book['author_id'] = $book->getAuthor();
         $book['note_id'] = $book->getNote();
         $book['synopsis_id'] = $book->getSynopsis();
+        $book['comment_id'] = $book->getComment();
 
         $book['note_id'] = $book->getNote();
 

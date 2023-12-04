@@ -736,10 +736,16 @@ p {
     gap: 30px;
 }
 
-.edit button {
-    padding: 5px 5px;
-    background-color: #f2ebf4;
+.edit {
+    display: flex;
+    gap: 3%;
+    margin-right: 8%;
 }
+
+.show-btn {
+    margin-bottom: 30%;
+}
+
 .showTitle {
     margin: auto;
     text-transform: uppercase;

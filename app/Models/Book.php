@@ -44,13 +44,6 @@ class Book extends Model
         return $author->name;
     }
 
-    public static function getAllAuthor()
-    {
-        return Book::select('books.*', 'authors.name as author')
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy('name')
-            ->get();
-    }
 
     public function Note(): HasOne
     {
@@ -63,13 +56,6 @@ class Book extends Model
         return $note->note;
     }
 
-    // public static function getAllNote()
-    // {
-    //     return Book::select('books.note_id', 'notes.note as note')
-    //         ->join('notes', 'books.note_id', '=', 'notes.id')
-    //         ->orderBy('note')
-    //         ->get();
-    // }
 
     public function Synopsis(): HasOne
     {
