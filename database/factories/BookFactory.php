@@ -16,10 +16,6 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'title' => fake()->text(20),
-            'year' => fake()->numberBetween(1487, 2023),
-            'image' => fake()->url()
-        ];
+        return [];
     }
 }

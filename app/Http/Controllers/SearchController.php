@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -12,42 +13,16 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        // if (request('search')) {
-        //     $book = Book::where('title', 'like', '%' . request('search') . '%')->get();
-        // } else {
-        //     $book = Book::all();
-        // }
-        // $query = Book::select('*');
-        // $fields = ['author_id', 'genre_id'];
-        // foreach ($fields as $field) {
-        //     if (!empty($request->$field)) {
-        //         $query->where($field, '=', $request->$field);
-        //     } else {
-        //         $book = Book::all();
-        //     }
-        // }
+        $search = DB::table('books')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
 
         return view('book.index', compact('book'));
     }
 
-    public function filter(Request $request, Book $book)
-    {
-        // Search for a user based on their name.
-        // if ($request->has('author_id')) {
-        //     return $book->where('author_id', $request->input('author_id'))->get();
-        // }
 
-        // // Search for a user based on their company.
-        // if ($request->has('company')) {
-        //     return $user->where('company', $request->input('company'))
-        //         ->get();
-        // }
-
-        // // Search for a user based on their city.
-        // if ($request->has('city')) {
-        //     return $user->where('city', $request->input('city'))->get();
-        // }
-    }
 
     public function create()
     {

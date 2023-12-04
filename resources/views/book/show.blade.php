@@ -6,11 +6,14 @@
 <div class="headline">
     <div class="showTitle">
         <h1>{{$book['title']}}</h1>
+        <h1>{{$book['author_id']}}</h1>
     </div>
+    @if (Auth::check())
     @if(Auth::User()->id == $book->user_id)
     <div class="edit">
-        <a href="{{route('book.edit', $book->id)}}"><button>Modifier</button></a>
+        <a href="{{route('book.edit', $book->id)}}"><button type="submit" id="submit-btn">Modifier</button></a>
     </div>
+    @endif
     @endif
 </div>
 
@@ -31,28 +34,37 @@
 <div class="details">
     
     <ul>
-        <li>Auteur : {{$book['author_id']}}</li>
-        <li>Synopsis : {{$book['synopsis_id']}}</li>
-        <li>Genre : {{$book['genre_id']}}</li>
-        <li>Année : {{$book['year']}}</li>
-        <li>Note : {{$moyenne}}</li>
+        <div class="show-syn">
+            <li> {{$book['synopsis_id']}}</li>
+        </div>
+       
+        <div class="in-a-row">
+           <li>Genre : {{$book['genre_id']}}</li>
+           <li>Année : {{$book['year']}}</li>
+           <li>Note : {{$moyenne}} /5</li>
+        </div>
     </ul>
+    @if (Auth::check())
     @if(Auth::User()->id == $book->user_id)
     <form action="{{route('book.destroy', $book['id'])}}" method="post" class="tool">
         @csrf
         @method('delete')
-        <button type="submit">
-        Delete the motherfucker
+        <button type="submit" id="submit-btn">
+        Supprimer
         </button>
     </form>
+    @endif
     @endif
 
     <form action='{{route('book.store_note', $book->id)}}' method='post'>
         @csrf
         @method('patch')
-        <input type="number" name="note" placeholder="Note" min="0" max="5">
-        <input type="text" name="comment" placeholder="Commentaire">
-        <button type="submit">Valider</button>
+        <div class="bottom-cont">
+            <input type="number" name="note" placeholder="Noter" min="0" max="5">
+            <input type="text" name="comment" placeholder="Commenter">
+        </div>
+        
+        <button type="submit" id="submit-btn">Valider</button>
     </form>
 </div>
 </div>

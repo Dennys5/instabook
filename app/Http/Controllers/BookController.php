@@ -8,7 +8,6 @@ use App\Models\Book;
 use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Note;
-use App\Models\Tag;
 use App\Models\Synopsis;
 use Illuminate\Http\Request;
 
@@ -47,7 +46,6 @@ class BookController extends Controller
             'genre' => 'required|exists:genres,id',
             'synopsis' => 'required',
             'note' => 'required|integer',
-            'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3000'
         ]);
 
@@ -78,7 +76,6 @@ class BookController extends Controller
             'synopsis_id' => $synopsis->id,
             'book_id' => $note->book_id,
             'note_id' => $note->id,
-            'tag' => $request->tag,
             'image' => $fileName
         ]);
 
@@ -95,20 +92,6 @@ class BookController extends Controller
         // $book['comment_id'] = $book->getComment();
 
         $note = Note::where('book_id', $book->id)->avg('note');
-        // $notes = Note::findOrFail($book->id)->get();
-
-        // $note = 0;
-        // foreach ($notes as $key) {
-        //     dd($key);
-        //     $note += $key->note;
-        // }
-
-        // $numberNote = $notes->count();
-        // if ($numberNote != 0) {
-        //     $result = $note / $numberNote;
-        // } else {
-        //     $result = "Aucune note";
-        // }
 
         return view('book.show')->with([
             'book' => $book,
@@ -137,7 +120,6 @@ class BookController extends Controller
             'synopsis_id' => 'required',
             'comment_id' => 'required',
             'note_id' => 'required|integer',
-            'tag' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
@@ -149,7 +131,6 @@ class BookController extends Controller
         $book->synopsis = $request->synopsis;
         $book->comment = $request->comment;
         $book->note = $request->note;
-        $book->tag = $request->tag;
         $book->image = $request->image;
 
 
@@ -174,8 +155,12 @@ class BookController extends Controller
         $request->validate([
             'note' => 'required|integer'
         ]);
-        $user_id = Auth::id();
 
+        $user_id = Auth::id();
+        $book['genre_id'] = $book->getGenre();
+        $book['author_id'] = $book->getAuthor();
+        $book['note_id'] = $book->getNote();
+        $book['synopsis_id'] = $book->getSynopsis();
 
         $book['note_id'] = $book->getNote();
 
@@ -185,6 +170,11 @@ class BookController extends Controller
             'book_id' => $book->id
         ]);
 
-        return view('book.show', compact('book'));
+        $note = Note::where('book_id', $book->id)->avg('note');
+
+        return view('book.show')->with([
+            'book' => $book,
+            'moyenne' => $note
+        ]);
     }
 }
