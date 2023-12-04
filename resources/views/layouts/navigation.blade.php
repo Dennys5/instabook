@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Auth;
                         {{__('Home')}}
                     </x-nav-link>
                 </div>
-
+                 
+                @if (Auth::guest())
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{route('register')}}">
                         {{ __('Inscription')}}
@@ -32,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
                     </x-nav-link>
                 </div>
             </div>
-
+            @endif
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -49,15 +50,6 @@ use Illuminate\Support\Facades\Auth;
                                 </div>
                             </button>
                         </x-slot> 
-                        <?php
-                           } else {
-                            ?>              
-                                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <x-nav-link href="{{route('login')}}">
-                                        {{ __('Connexion')}}
-                                    </x-nav-link>
-                                </div> --}}
-                                    <?php } ?>
                                             
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
@@ -67,7 +59,9 @@ use Illuminate\Support\Facades\Auth;
                         <x-dropdown-link :href="route('book.create')">
                             {{ __('Publier un livre') }}
                         </x-dropdown-link>
-
+                        
+                        <?php }
+                        ?>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

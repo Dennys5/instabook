@@ -148,6 +148,7 @@ body {
     gap: 10%;
     background-color: white;
     border-radius: 4px;
+    border: none;
 }
 
 #submit-btn {
@@ -178,44 +179,6 @@ textarea {
     border-bottom: 1px solid grey !important;
 }
 
-/* .create-box {rgb(17, 13, 13)
-    margin: auto;
-    margin-top: 150px;
-    margin-bottom: 150px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: url("https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&");
-    width: 52vw;
-    height: 80vh;
-    border-radius: 20px;
-} */
-
-/* .create {
-    display: flex;
-    flex-direction: row;
-}
-
-.create-box div {
-    display: flex;
-    flex-direction: column;
-}
-
-.auteur {
-    border-radius: 3%;
-}
-
-.avant {
-    z-index: 2;
-}
-
-input .bouton {
-    border: 1px solid #272727 !important;
-    color: #111;
-} */
-
 /* css footer */
 body {
     color: #ccc;
@@ -227,7 +190,6 @@ body {
 p {
     font-family: "Nunito", sans-serif;
     font-size: 16px;
-    color: white;
     line-height: 28px;
 }
 
@@ -742,7 +704,7 @@ p {
     background-image: url("https://cdn.discordapp.com/attachments/1154418633741709372/1179347999709736991/image.png?ex=6579746a&is=6566ff6a&hm=41c46f06168fa7760f4396ca81f698fa2921b5e20d7a7a715b11b8a397a4ba01&");
     color: #2b2b2b;
     width: 45vw;
-    height: 65vh;
+    height: 70vh;
     padding-top: 50px;
     padding-left: 50px;
     padding-right: 50px;
@@ -753,11 +715,11 @@ p {
     background-size: cover;
     margin-right: 60px;
     margin-bottom: 100px;
+    border-radius: 12px;
 }
 
 .headline {
     margin-top: 40px;
-    margin-left: 1000px;
     display: flex;
     gap: 30px;
 }
@@ -767,8 +729,8 @@ p {
     background-color: #f2ebf4;
 }
 .showTitle {
-    display: flex;
-    flex-direction: column;
+    margin: auto;
+    text-transform: uppercase;
 }
 
 .showTitle h1 {
@@ -786,15 +748,29 @@ p {
     margin-top: 10%;
 }
 
+.show-sync p {
+    font-family: bold;
+}
+
 .bottom-cont {
     display: flex;
     justify-content: center;
+    border-bottom: 0.1rem solid #1f2937;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
     gap: 3%;
 }
 
 .bottom-cont input {
     border: none;
-    border-bottom: 1px solid grey;
+
+    border-radius: 4px;
+    background-color: #1f2937;
+    color: white;
+}
+span {
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .container-show .book-show {

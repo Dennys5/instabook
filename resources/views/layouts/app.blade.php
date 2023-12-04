@@ -198,7 +198,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <span>Copyright © 2023, Tous Droits Reéservés INSTABOOK</span>
+                        <span>Copyright © 2023, Tous Droits Réservés INSTABOOK</span>
                     </div>
                     <!-- End Col -->
                     <div class="col-md-6">

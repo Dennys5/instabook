@@ -5,8 +5,7 @@
 @section('content')
 <div class="headline">
     <div class="showTitle">
-        <h1>{{$book['title']}}</h1>
-        <h1>{{$book['author_id']}}</h1>
+        <h1>Détails du livre</h1>
     </div>
     @if (Auth::check())
     @if(Auth::User()->id == $book->user_id)
@@ -33,17 +32,16 @@
    
 <div class="details">
     
-    <ul>
         <div class="show-syn">
-            <li> {{$book['synopsis_id']}}</li>
+            <p><span>synopsis :</span> {{$book['synopsis_id']}}</p>
         </div>
        
         <div class="in-a-row">
-           <li>Genre : {{$book['genre_id']}}</li>
-           <li>Année : {{$book['year']}}</li>
-           <li>Note : {{$moyenne}} /5</li>
+           <p><span>Genre :</span> {{$book['genre_id']}}</p>
+           <p><span>Année :</span> {{$book['year']}}</p>
+           <p><span>Note :</span> {{$moyenne}} /5</p>
         </div>
-    </ul>
+
     @if (Auth::check())
     @if(Auth::User()->id == $book->user_id)
     <form action="{{route('book.destroy', $book['id'])}}" method="post" class="tool">
